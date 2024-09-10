@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Driver Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="header-center">
+            <h1>TAXI</h1>
+        </div>
+        <div class="header-right">
+            <div class="language-selector">
+                <select id="languageSelect">
+                    <option value="it" selected>Italiano</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="menu-icon">
+                <span class="material-icons">menu</span>
+            </div>
+        </div>
+    </header>
+    <nav class="hidden">
+        <ul id="menu">
+            <li><a href="#services" data-translate="menuServices"></a></li>
+            <li><a href="#about" data-translate="menuAbout"></a></li>
+            <li><a href="#fares" data-translate="menuFares"></a></li>
+            <li><a href="#contact" data-translate="menuContact"></a></li>
+        </ul>
+    </nav>
+
+    <section id="services">
+        <h2 data-translate="servicesTitle"></h2>
+        <p data-translate="servicesDescription"></p>
+    </section>
+
+    <section id="slider">
+        <div class="slides">
+            <img src="slide1.jpg" alt="Slide 1">
+            <img src="slide2.jpg" alt="Slide 2">
+            <img src="slide3.jpg" alt="Slide 3">
+        </div>
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 data-translate="aboutTitle"></h2>
+        <p data-translate="aboutDescription"></p>
+    </section>
+
+    <section id="fares">
+        <h2 data-translate="faresTitle"></h2>
+        <p data-translate="faresDescription"></p>
+    </section>
+
+    <section id="contact">
+        <h2 data-translate="contactTitle"></h2>
+        <p data-translate="contactPhone"></p>
+        <p data-translate="contactEmail"></p>
+        <p data-translate="contactAddress"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Taxi Driver Service. All rights reserved.</p>
+        <p>VAT Number: 123456789</p>
+        <p>Registered Company Number: 987654321</p>
+        <p>Data Protection Officer: John Doe</p>
+    </footer>
+
+    <a href="https://wa.me/123456789" class="whatsapp-link" target="_blank">
+        <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

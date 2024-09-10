@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: relative;
+    z-index: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+}
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.language-selector select {
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+
+nav {
+    top:-252px;
+    /*opacity: 0;*/
+    flex-direction: column;
+    position: absolute;
+    background-color: #000;
+    width: calc( 100% - 40px);
+    padding: 10px 20px;
+    z-index: 100;
+}
+
+nav.visible {
+    top: 100px;
+    /*opacity: 1;*/
+    transition: top .3s ease/*, opacity .4s ease*/;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    padding: 20px 0px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+    margin: 10px;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slides img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+.dots {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.whatsapp-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #00bd47;
+}
+
+.whatsapp-link img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    filter: invert(1);
+}
