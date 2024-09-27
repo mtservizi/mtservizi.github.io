@@ -49,9 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
         switchLanguage(event.target.value);
     });
 
+
+    /*
     document.querySelector('.menu-icon').addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('visible');
-    });
+    });*/
 
     let slideIndex = 0;
     let slideTimeout;
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showSlides() {
         clearTimeout(slideTimeout);
-        let slides = document.querySelectorAll('.slides img');
+        let slides = document.querySelectorAll('.slides .slide-image-container');
         let dots = document.querySelectorAll('.dot');
         slides.forEach((slide, index) => {
             slide.style.display = 'none';
@@ -90,13 +92,45 @@ document.addEventListener("DOMContentLoaded", () => {
         if (startX - endX > 50) {
             // Swipe right
             slideIndex++;
-            if (slideIndex > slidesContainer.querySelectorAll('img').length) { slideIndex = 1 }
+            if (slideIndex > slidesContainer.querySelectorAll('.slide-image-container').length) { slideIndex = 1 }
         } else if (endX - startX > 50) {
             // Swipe left
             slideIndex--;
-            if (slideIndex < 1) { slideIndex = slidesContainer.querySelectorAll('img').length }
+            if (slideIndex < 1) { slideIndex = slidesContainer.querySelectorAll('.slide-image-container').length }
         }
         slideIndex--; //showSlides will increment that
         showSlides();
     });
+
+    function carManager(){
+        const car = document.querySelector('.car');
+
+        // Funzione per tracciare il percorso
+        function moveCar(scrollPercentage) {
+            // Calcola una posizione curva o lungo un percorso predefinito (ad es. sinusoide)
+            // In questo esempio la macchina si muove orizzontalmente e verticalmente.
+            const y = scrollPercentage * 100; // Movimento orizzontale (da sinistra a destra)
+            
+            // Movimento orizzontale con una sinusoide per creare una curva
+            const x = Math.sin(scrollPercentage * 4 * Math.PI) * 50 + 50; // Movimento su/giù
+            
+            // Aggiorna la posizione dell'auto
+            car.style.left = `${x}%`;
+            car.style.top = `${y}%`;
+        }
+
+        // Funzione per ottenere la percentuale di scroll
+        function onScroll() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercentage = scrollTop / docHeight;
+
+            moveCar(scrollPercentage);
+        }
+
+        // Aggiungi l'evento scroll
+        window.addEventListener('scroll', onScroll);
+    }
+
+    //carManager();
 });

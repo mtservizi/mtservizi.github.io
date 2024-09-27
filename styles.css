@@ -6,12 +6,14 @@ body {
 }
 
 header {
+    height: 10vh;
+    min-height: 50px;
+    padding: 20px;
     position: relative;
     z-index: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     background-color: #000;
     color: #fff;
 }
@@ -19,6 +21,14 @@ header {
 .header-left, .header-right {
     display: flex;
     align-items: center;
+}
+
+.header-right > div:not(:last-child) {
+    margin-right: 2vh;
+}
+
+.header-right .menu-icon .material-icons {
+    line-height: 29px;
 }
 
 .logo {
@@ -53,7 +63,7 @@ nav {
 }
 
 nav.visible {
-    top: 100px;
+    top: calc( 10vh + 20px );
     /*opacity: 1;*/
     transition: top .3s ease/*, opacity .4s ease*/;
 }
@@ -78,23 +88,75 @@ section {
     margin: 10px;
 }
 
+section#slider {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
 .slides {
     position: relative;
     width: 100%;
     height: 200px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.slides img {
-    max-width: 100%;
-    max-height: 100%;
+.slides .slide-image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: none;
 }
 
+.slides .slide-image {
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+#slide-image-1 {
+    background-image: url("slide1.jpg");
+}
+#slide-image-2 {
+    background-image: url("slide2.jpg");
+}
+#slide-image-3 {
+    background-image: url("slide3.jpg");
+}
+
+.loading-bar-container {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #555;
+    border-radius: 10px;
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
 .dots {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
     text-align: center;
     padding: 10px 0;
 }
@@ -103,14 +165,17 @@ section {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #bbb;
+    background-color: #eaeaea;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
+    transition: width 0.5s ease, height 0.5s ease, border-radius 0.5s ease;
 }
 
 .dot.active {
     background-color: #717171;
+    width: 30px;
+    border-radius: 15px;
 }
 
 footer {
@@ -135,4 +200,26 @@ footer {
     height: 30px;
     margin: 10px;
     filter: invert(1);
+}
+
+/*Sticky header
+header {
+    position: fixed;
+    width: calc(100% - 40px);
+    top: 0px;
+}
+*/
+
+.car {
+    position: absolute;
+    width: 1vh; /* Larghezza dell'immagine dell'auto */
+    height: 1vh; /* Altezza dell'immagine dell'auto */
+    top: 0;     
+    left: 0;      /* Partenza da sinistra */
+    transform: translateY(-50%);
+  }
+
+.car img {
+    width: 100%;
+    height: auto;
 }
