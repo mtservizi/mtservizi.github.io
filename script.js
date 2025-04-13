@@ -1,136 +1,123 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const translations = {
-        "it": {
-            "menuServices": "Servizi",
-            "menuAbout": "Chi Siamo",
-            "menuFares": "Tariffe",
-            "menuContact": "Contatti",
-            "servicesTitle": "I Nostri Servizi",
-            "servicesDescription": "Forniamo una gamma di servizi taxi tra cui trasferimenti aeroportuali, tour della città e viaggi a lunga distanza.",
-            "aboutTitle": "Chi Siamo",
-            "aboutDescription": "Siamo un team dedicato di autisti professionisti con anni di esperienza. Il nostro obiettivo è fornire servizi di trasporto sicuri e affidabili ai nostri clienti.",
-            "faresTitle": "Tariffe",
-            "faresDescription": "Le nostre tariffe sono competitive e trasparenti. Puoi utilizzare il nostro calcolatore di tariffe per stimare il costo del tuo viaggio.",
-            "contactTitle": "Contattaci",
-            "contactPhone": "Telefono: +123456789",
-            "contactEmail": "Email: info@taxidriverservice.com",
-            "contactAddress": "Indirizzo: Via Taxi 123, Città, Paese"
-        },
-        "en": {
-            "menuServices": "Services",
-            "menuAbout": "About Us",
-            "menuFares": "Fares",
-            "menuContact": "Contact",
-            "servicesTitle": "Our Services",
-            "servicesDescription": "We provide a range of taxi services including airport transfers, city tours, and long-distance journeys.",
-            "aboutTitle": "About Us",
-            "aboutDescription": "We are a dedicated team of professional drivers with years of experience. Our goal is to provide safe and reliable transportation services to our clients.",
-            "faresTitle": "Fares",
-            "faresDescription": "Our fares are competitive and transparent. You can use our fare calculator to estimate the cost of your trip.",
-            "contactTitle": "Contact Us",
-            "contactPhone": "Phone: +123456789",
-            "contactEmail": "Email: info@taxidriverservice.com",
-            "contactAddress": "Address: Via Taxi 123, City, Country"
-        }
-    };
+const translations = {
+  en: {
+    fleetTitle: "Our Fleet",
+    home: "Home",
+    about: "About",
+    services: "Services",
+    gallery: "Gallery",
+    reviews: "Reviews",
+    contact: "Contact",
+    title: "Travel in style, arrive with elegance",
+    subtitle: "Professional chauffeur service for all your needs: airports, events, private tours, and more.",
+    description: "We provide private, comfortable, and safe transfers to any destination. Our priority is your comfort and punctuality.",
+    aboutTitle: "About Us",
+    aboutText: "We are a team of professional drivers dedicated to providing you with a premium travel experience. Punctuality, discretion, and comfort are our core values.",
+    servicesTitle: "Our Services",
+    airportTransfers: "Airport Transfers",
+    airportDesc: "Reach airports on time and stress-free.",
+    corporateTransfers: "Corporate Transfers",
+    corporateDesc: "Elegant solutions for meetings and business trips.",
+    privateEvents: "Private Events",
+    eventsDesc: "Dedicated transportation for weddings, parties, and special occasions.",
+    privateTours: "Private Tours",
+    toursDesc: "Discover the city or local attractions with our personalized tours.",
+    availability: "24/7 Availability",
+    availabilityDesc: "We are always available, every day, at any time. Weekend by reservation",
+    contactTitle: "Contact Us"
+  },
+  it: {
+    fleetTitle: "La Nostra Flotta",
+    home: "Home",
+    about: "Chi Siamo",
+    services: "Servizi",
+    gallery: "Galleria",
+    reviews: "Recensioni",
+    contact: "Contatti",
+    title: "Viaggia con stile, arriva con eleganza",
+    subtitle: "Servizio di autista professionale per tutte le tue esigenze: aeroporti, eventi, tour privati e altro.",
+    description: "Forniamo trasferimenti privati, confortevoli e sicuri verso qualsiasi destinazione. La nostra priorità è il tuo comfort e la puntualità.",
+    aboutTitle: "Chi Siamo",
+    aboutText: "Siamo un team di autisti professionisti dedicati a fornirti un'esperienza di viaggio premium. Puntualità, discrezione e comfort sono i nostri valori fondamentali.",
+    servicesTitle: "I Nostri Servizi",
+    airportTransfers: "Trasferimenti Aeroportuali",
+    airportDesc: "Raggiungi gli aeroporti in orario e senza stress.",
+    corporateTransfers: "Trasferimenti Aziendali",
+    corporateDesc: "Soluzioni eleganti per meeting e viaggi d'affari.",
+    privateEvents: "Eventi Privati",
+    eventsDesc: "Trasporti dedicati per matrimoni, feste e occasioni speciali.",
+    privateTours: "Tour Privati",
+    toursDesc: "Scopri la città o le attrazioni locali con i nostri tour personalizzati.",
+    availability: "Disponibilità 24/7",
+    availabilityDesc: "Siamo sempre disponibili, ogni giorno, a qualsiasi ora.\nWeekend su prenotazione",
+    contactTitle: "Contattaci"
+  }
+};
 
-    const languageSelect = document.getElementById("languageSelect");
+let currentLang = 'it';
+let lastScrollTop = 0;
 
-    function switchLanguage(lang) {
-        document.querySelectorAll('[data-translate]').forEach(el => {
-            const key = el.getAttribute('data-translate');
-            el.innerText = translations[lang][key];
-        });
+function handleToggle(checkbox) {
+  switchLanguage(checkbox.checked ? 'it' : 'en');
+}
+
+function switchLanguage(lang) {
+  currentLang = lang;
+
+  // Update navigation links
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    const key = link.getAttribute('href').substring(1);
+    if (translations[lang][key]) {
+      link.textContent = translations[lang][key];
     }
+  });
 
-    switchLanguage(languageSelect.value);
-
-    languageSelect.addEventListener('change', (event) => {
-        switchLanguage(event.target.value);
-    });
-
-
-    /*
-    document.querySelector('.menu-icon').addEventListener('click', () => {
-        document.querySelector('nav').classList.toggle('visible');
-    });*/
-
-    let slideIndex = 0;
-    let slideTimeout;
-    showSlides();
-
-    function showSlides() {
-        clearTimeout(slideTimeout);
-        let slides = document.querySelectorAll('.slides .slide-image-container');
-        let dots = document.querySelectorAll('.dot');
-        slides.forEach((slide, index) => {
-            slide.style.display = 'none';
-            dots[index].classList.remove('active');
-        });
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-        slides[slideIndex-1].style.display = 'block';
-        dots[slideIndex-1].classList.add('active');
-        slideTimeout = setTimeout(showSlides, 3000); // Change image every 3 seconds
+  // Update all elements with data-translate attribute
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(element => {
+    const key = element.getAttribute('data-translate');
+    if (translations[lang][key]) {
+      element.textContent = translations[lang][key];
     }
+  });
+}
 
-    window.currentSlide = function (n) {
-        slideIndex = n;
-        showSlides();
+// Initialize page in Italian
+document.addEventListener('DOMContentLoaded', () => {
+  switchLanguage('it');
+});
+
+// Scroll handling
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  const currentScroll = window.pageYOffset;
+
+  if (currentScroll > 100) {
+    nav.classList.add('scrolled');
+    if (currentScroll > lastScrollTop) {
+      nav.classList.remove('show');
+    } else {
+      nav.classList.add('show');
     }
+  } else {
+    nav.classList.remove('scrolled');
+  }
 
-    // Add swipe functionality for mobile
-    let startX, endX;
-    const slidesContainer = document.querySelector('.slides');
+  lastScrollTop = currentScroll;
+});
 
-    slidesContainer.addEventListener('touchstart', e => {
-        startX = e.changedTouches[0].pageX;
-    });
-
-    slidesContainer.addEventListener('touchend', e => {
-        endX = e.changedTouches[0].pageX;
-        if (startX - endX > 50) {
-            // Swipe right
-            slideIndex++;
-            if (slideIndex > slidesContainer.querySelectorAll('.slide-image-container').length) { slideIndex = 1 }
-        } else if (endX - startX > 50) {
-            // Swipe left
-            slideIndex--;
-            if (slideIndex < 1) { slideIndex = slidesContainer.querySelectorAll('.slide-image-container').length }
-        }
-        slideIndex--; //showSlides will increment that
-        showSlides();
-    });
-
-    function carManager(){
-        const car = document.querySelector('.car');
-
-        // Funzione per tracciare il percorso
-        function moveCar(scrollPercentage) {
-            // Calcola una posizione curva o lungo un percorso predefinito (ad es. sinusoide)
-            // In questo esempio la macchina si muove orizzontalmente e verticalmente.
-            const y = scrollPercentage * 100; // Movimento orizzontale (da sinistra a destra)
-            
-            // Movimento orizzontale con una sinusoide per creare una curva
-            const x = Math.sin(scrollPercentage * 4 * Math.PI) * 50 + 50; // Movimento su/giù
-            
-            // Aggiorna la posizione dell'auto
-            car.style.left = `${x}%`;
-            car.style.top = `${y}%`;
-        }
-
-        // Funzione per ottenere la percentuale di scroll
-        function onScroll() {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercentage = scrollTop / docHeight;
-
-            moveCar(scrollPercentage);
-        }
-
-        // Aggiungi l'evento scroll
-        window.addEventListener('scroll', onScroll);
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    const nav = document.querySelector('nav');
+    if (targetElement) {
+      if (nav) nav.classList.remove('show');
+      targetElement.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
-
-    //carManager();
+  });
 });
